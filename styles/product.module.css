@@ -1,0 +1,135 @@
+/*********product page********/
+.product_page{
+    background-color: #fff;
+    overflow: hidden;
+    padding-bottom: 50px;
+}
+
+.product_page_left{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.product_page_left div:not(.active_image){
+    width: 31%;
+    opacity: 0.7;
+}
+.product_page_left div:hover{
+    opacity: 1;
+    transition: 0.2s linear all;
+}
+
+.product_page_inner{
+    padding: 50px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.individual_product_image{
+    background-color: #fff;
+    position: relative;
+    order:2;
+    cursor: pointer;
+}
+.individual_product_image h5{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9;
+}
+.active_image{
+    order: 1;
+}
+
+.product_page h3{
+    font-family: Audiowide;
+    color: #06094e;
+    text-transform: uppercase;
+}
+.product_page_right{
+    text-align: left;
+    font-family: Pragmatica, Geneva, Tahoma, sans-serif;
+    padding: 30px;
+}
+.product_page_right h5{
+    margin:15px auto;
+}
+.product_page_right label{
+    font-size: 0.8rem;
+    margin: 16px auto 0;
+    display: inline-block;
+    white-space: nowrap;
+    padding-right: 10px;
+    color: #474747;
+}
+.product_page select{
+    border-color:#fff;
+    background-color: #fff;
+    border-bottom-color: #474747;
+    display:block;
+    width:100%;
+}
+.individual_option{
+    display: flex;
+    justify-content: flex-start;
+}
+.individual_option:nth-child(4),
+.individual_option:nth-child(5){
+    flex-wrap: wrap;
+}
+
+.individual_option:nth-child(4) label,
+.individual_option:nth-child(5) label{
+    margin-left:0;
+    margin-bottom: 10px;
+}
+
+.product_page_right button{
+    font-family: Audiowide;
+    width: 100%;
+    padding: 7px;
+    margin:5px auto;
+    color: #06094e;
+    font-weight: bold;
+    font-size: 0.7rem;
+}
+.product_page_right .white_btn{
+    background-color: #fff;
+    border:2px solid #79d2d4;
+    margin-top: 15px;
+}
+.product_page_right .blue_btn{
+    background-color: #79d2d4;
+    border:none;
+}
+
+.product_page_text_container{
+    max-width: 900px;
+    padding: 0 50px;
+    margin:auto;
+    font-family: Pragmatica;
+}
+.product_page_text_container p{
+    color: #474747;
+    line-height: 20px;
+}
+
+.product_page_text_container h4{
+    font-family: Audiowide;
+    color: #06094e;
+    text-align: left;
+}
+.product_page_text_container h4 + p{
+    margin-top: 8px;
+}
+
+
+
+@media (min-width: 768px){
+    .product_page_inner > div{
+        width: 50%;
+    }
+    .product_page_inner{
+        display: flex;
+    }
+}
