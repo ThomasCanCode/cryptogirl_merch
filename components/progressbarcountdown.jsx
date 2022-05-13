@@ -1,5 +1,4 @@
 import styles from '../styles/Home.module.css'
-import React from 'react';
 import Countdown from 'react-countdown';
 
 export default function ProgressBarCountdown(props){

@@ -1,7 +1,6 @@
-import Head from 'next/head'
 import Image from 'next/image'
 import Script from 'next/script'
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 
 import styles from '../styles/Home.module.css'
 

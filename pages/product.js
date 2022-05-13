@@ -1,22 +1,16 @@
-import Head from 'next/head'
 import Image from 'next/image'
 import Script from 'next/script'
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 
 import styles from '../styles/Home.module.css'
 import product_styles from "../styles/product.module.css"
 
 import logo from '/static/images/logo.png'
 import banner from '/static/images/top.jpg'
-import hoodies from '/static/images/hoodies.jpg'
-import wide_banner from '/static/images/wide_banner.png'
-import hand_painted_background from '/static/images/hand_painted_background.jpg'
 import sneakers from '/static/images/sneakers.png'
 import jacket from '/static/images/jacket.png'
 import black_sneakers from '/static/images/black_sneakers.png'
-import canvas_prints_background from '/static/images/canvas_prints_background.jpg'
 import canvas_prints from '/static/images/canvas_prints.jpg'
-import post_canvas_bg from '/static/images/post_canvas_bg.jpg'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";

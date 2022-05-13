@@ -1,7 +1,6 @@
-import Head from 'next/head'
 import Image from 'next/image'
 import Script from 'next/script'
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 import ProgressBarCountdown from "../components/progressbarcountdown";
 import styles from '../styles/Home.module.css'
 import "slick-carousel/slick/slick.css"; 
@@ -12,12 +11,12 @@ import demo_1 from '/static/images/demo_1.png'
 import demo_2 from '/static/images/demo_2.png'
 import demo_3 from '/static/images/demo_3.png'
 
-var total_points = 10;
+var total_points = 10
 
 import dynamic from 'next/dynamic'
 
 const DynamicComponentWithCustomLoading = dynamic(
-    () => import('../components/mint_page.jsx'),
+    () => import('../components/connect.jsx'), 
     { loading: () => <p>...</p> }
   )
   
@@ -68,7 +67,6 @@ export default function Home() {
 
 const settings = {
   arrows: true,
-  speed: 500,
   slidesToShow: 3,
   slidesToScroll: 1,
   autoplay: true,
