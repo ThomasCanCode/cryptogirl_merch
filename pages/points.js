@@ -1,34 +1,89 @@
-import Image from 'next/image'
 import Script from 'next/script'
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import ProgressBarCountdown from "../components/progressbarcountdown";
 import styles from '../styles/Home.module.css'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-
-import demo_1 from '/static/images/demo_1.png'
-import demo_2 from '/static/images/demo_2.png'
-import demo_3 from '/static/images/demo_3.png'
+import dynamic from 'next/dynamic'
 
 var total_points = 10
 
-import dynamic from 'next/dynamic'
 
 const DynamicComponentWithCustomLoading = dynamic(
-    () => import('../components/connect.jsx'), 
-    { loading: () => <p>...</p> }
+    () => import('../components/connect.jsx')
   )
+
+
+// export async function getStaticProps() {
+
+//   console.log('yea')
+//   // ...
+//   return {
+//     props: {
+//       posts,
+//     },
+//   }
+// }
+
+
+export default async function Home() {
+
+  const [testt, setTest] = useState(false);
+
+  function totalPoints(){
+     total_points = 100;
+    console.log('points: '+total_points)
+    setTest(false)
+
+  }
+
+  function PointsArea(){
+    
+    if(total_points > 10){
+      return (
+        <>
+          <h2>YOU HAVE UNCLAIMED POINTS!</h2>
+          <button className={styles.collect+" "+styles.animated_anchor}>COLLECT THEM NOW</button>
+          <h5>YOUR TOTAL POINTS: {total_points}</h5> 
+        </>
+      )
+    }else{
+      return (
+        <>
+          <button onClick={totalPoints}>add points</button>
+          <h2>Vino altadata mancatias</h2>
+        </>
+      )
+    }
+ }
+
+ function PointsAreaa(){
+  function totalPoints(){
+     total_points = 100;
+    console.log('points: '+total_points)
+    setTest(true)
+
+  }
   
-export default function Home() {
+
+    return (
+      <>
+        <button onClick={totalPoints}>add points</button>
+        <h2>Vino altadata mancatissssssssas</h2>
+      </>
+    )
+  
+}
+
+ 
   return (
     <div className={styles.points_page_container}>
       <div>
+
         <h1>CRYPTOGIRL</h1>
         <h2>POINTS</h2>
-        <h2>YOU HAVE UNCLAIMED POINTS!</h2>
-        <button className={styles.collect+" "+styles.animated_anchor}>COLLECT THEM NOW</button>
-        <h5>YOUR TOTAL POINTS: {total_points}</h5>   
+        {testt ? <PointsArea/>  : <PointsAreaa/>  }
 
         <div className={styles.progress_container}>
           <div>
@@ -49,12 +104,16 @@ export default function Home() {
         <button className={styles.withdraw}>WITHDRAW</button>
 
 
-        <DynamicComponentWithCustomLoading />
+        <DynamicComponentWithCustomLoading
+          onLoad={() => {
+            console.log('yeaa')
+          }} />
       
         <Script
           src="/static/inline.js" 
           onLoad={() => {
             // If loaded successfully, then you can load other scripts in sequence
+            console.log('inline.js loaded!')
           }}
         />
       </div>
@@ -92,23 +151,24 @@ const settings = {
 };
 export class Custom_carousel extends Component {
   render() {
+    /* eslint-disable */
     return (
       <div className={styles.points_slider}>
         <Slider {...settings}>
           <div>
-            <Image alt="" src={demo_1} />
+            <img alt="" src='/static/images/demo_1.png' className="nft_image"/> 
           </div>
 
           <div>
-            <Image alt="" src={demo_2} />
+            <img alt="" src='/static/images/demo_2.png' className="nft_image" />
           </div>
 
           <div>
-            <Image alt="" src={demo_3} />
+            <img alt="" src='/static/images/demo_3.png' className="nft_image" />
           </div>
 
           <div>
-            <Image alt="" src={demo_1} />
+            <img alt="" src='/static/images/demo_1.png' className="nft_image" />
           </div>
         </Slider>
       </div>
