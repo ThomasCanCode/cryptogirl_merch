@@ -41,7 +41,7 @@ export default function Home({childToParent}) {
         }
       }
     }
-  }, [childToParent])
+  }, [account,hasMetamask,isConnected,childToParent])
 
 }
 

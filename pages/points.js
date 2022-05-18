@@ -18,7 +18,7 @@ const DynamicComponentWithCustomLoading = dynamic(() =>
 
 export default function Home() {
   const [firstHeading, setFirstHeading] = useState("COME BACK ON THE 1ST")
-  const [collect, setCollect] = useState(true);
+  const [collect, setCollect] = useState(false);
   const [total_points, setTotal_points] = useState(0)
   const [hasUnclaimedPoints, setHasUnclaimedPoints] = useState(false);
   const [openseaData, setOpenseaData] = useState(false);
@@ -124,12 +124,11 @@ export default function Home() {
         </div>
 
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt
-          sagittis consequat massa tristique leo. Ipsum in massa et sodales amet
-          scelerisque vulputate.
+          Cryptogirl points is a source of passive income for all Cryptogirl NFT holders!
+          The lucky few who have unique pieces receive massive rewards!
         </p>
 
-        {collect ? <button className={styles.withdraw}>WITHDRAW</button> : <></> }
+        {collect ? <button className={styles.withdraw + " " + styles.animated_anchor}>WITHDRAW</button> : <></> }
       </>
     );
   }
@@ -211,7 +210,7 @@ export default function Home() {
   function WalletNotConnected() {
     return (
       <>
-        <h2 className={styles.marginTopBot}>Wallet not connected please connect to use page.</h2>
+        <h2 className={styles.marginTopBot}>Wallet not connected, please connect below!</h2>
         <button className={styles.withdraw} onClick={() => connect()}>Connect!</button> 
       </>
     );
@@ -250,10 +249,10 @@ export class Custom_carousel extends Component {
   }
   render() {
     let text = "YOUR CRYPTOGIRLS"
-    var slidesToShow;;
+    var slidesToShow = 0;
     if(this.state.slides.length > 2){
       slidesToShow = 3;
-    }else if(slidesToShow == 2){
+    }else if(this.state.slides.length == 2){
       slidesToShow = 2;
     }else if(this.state.slides == 0){
       text = '';

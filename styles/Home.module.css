@@ -424,6 +424,7 @@
 .points_slider img{
   padding: 20px!important;
   border-radius: 10%;
+  margin: auto;
 }
 .slider_container_points{
   padding-top: 10%;
