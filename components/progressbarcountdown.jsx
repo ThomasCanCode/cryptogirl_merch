@@ -2,7 +2,7 @@ import styles from '../styles/Home.module.css'
 import Countdown from 'react-countdown';
 
 export default function ProgressBarCountdown(props){
-    var next_monday = 1652302800000; //make this dynamic
+    var next_payday = global.next_payday; //make this dynamic
 
     const Completionist = () => <span>Withdraw points now!</span>;
 
@@ -13,8 +13,8 @@ export default function ProgressBarCountdown(props){
         return <Completionist />;
     } else {
         var total_seconds = (days * 24 * 3600) + (hours * 3600) + minutes * 60+seconds;
-        
-        var percetange = parseInt(100 - (total_seconds / 604800) * 100);
+        const hours_left = total_seconds / 60;
+        var percetange = 100 - parseInt(days * 3);
         // Render a countdown 
         return (
             <>
@@ -38,7 +38,7 @@ export default function ProgressBarCountdown(props){
   return (
     <div className={styles.progress_bar} suppressHydrationWarning={true}>
         <Countdown
-            date={next_monday}
+            date={next_payday}
             renderer={renderer}
         />
             

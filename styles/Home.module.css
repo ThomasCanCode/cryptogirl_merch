@@ -343,6 +343,7 @@
   font-family: Audiowide;
   color: #fff;
   padding: 0 10%;
+  padding-bottom: 30px;
 }
 .points_page_container *{
   font-family: Audiowide;
@@ -422,6 +423,7 @@
 
 .points_slider img{
   padding: 20px!important;
+  border-radius: 10%;
 }
 .slider_container_points{
   padding-top: 10%;
@@ -432,13 +434,15 @@
   color: #fff;
   border-radius: 10px;
   padding: 10px 5%;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 .points_slider *{
   text-align: center;
 }
 
-
+.marginTopBot{
+  margin: 5% 0;
+}
 
 @media (min-width: 1901px){
   
@@ -509,4 +513,3 @@
       margin:40px autp;
     }
   }
-    

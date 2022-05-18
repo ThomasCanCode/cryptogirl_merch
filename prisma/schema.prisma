@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model user_wallet {
+  id     Int     @unique(map: "id") @default(autoincrement())
+  wallet String  @unique(map: "wallet") @db.VarChar(50)
+  date   BigInt?
+  points Int?    @default(0)
+}
