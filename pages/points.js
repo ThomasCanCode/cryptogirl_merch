@@ -8,8 +8,6 @@ import Slider from "react-slick";
 import dynamic from "next/dynamic";
 import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
-import useSWR from 'swr'
-
 
 const DynamicComponentWithCustomLoading = dynamic(() =>
   import("../components/connect.jsx"),
