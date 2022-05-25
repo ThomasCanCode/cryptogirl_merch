@@ -1,6 +1,8 @@
 {
   "name": "cryptogirl_merch",
   "version": "0.1.0",
+  "author": "ThomasDEV",
+  "license": "GPL-3.0-or-later",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,7 +10,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "license": "MIT",
   "dependencies": {
     "@prisma/client": "3.14.0",
     "@walletconnect/client": "^1.7.7",
@@ -16,6 +17,8 @@
     "@walletconnect/web3-provider": "^1.7.7",
     "ethers": "^5.6.4",
     "fs": "^0.0.1-security",
+    "html-react-parser": "^1.4.12",
+    "jotai": "^1.6.7",
     "net": "^1.0.2",
     "next": "12.1.4",
     "prisma": "^3.14.0",

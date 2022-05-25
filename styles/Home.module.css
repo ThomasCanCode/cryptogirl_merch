@@ -334,7 +334,9 @@
 .footer > span{
   min-height: 333px;
 }
-
+.unused_points{
+  margin: 30px auto;
+}
 
 .points_page_container{    
   background-image: url(/static/images/points_page_bg.jpg);
@@ -343,6 +345,7 @@
   font-family: Audiowide;
   color: #fff;
   padding: 0 10%;
+  overflow-x:hidden;
   padding-bottom: 30px;
 }
 .points_page_container *{
@@ -423,8 +426,9 @@
 
 .points_slider img{
   padding: 20px!important;
-  border-radius: 10%;
+  border-radius: 30px;
   margin: auto;
+  max-width: 100%;
 }
 .slider_container_points{
   padding-top: 10%;
@@ -440,11 +444,22 @@
 .points_slider *{
   text-align: center;
 }
-
 .marginTopBot{
   margin: 5% 0;
 }
-
+.disconnect_button{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px!important;
+}
+.no_cgc{
+  text-align: center;
+  color: #fff!important;
+}
+.no_cgc a{
+  text-decoration: underline!important;
+}
 @media (min-width: 1901px){
   
   .footer{
@@ -502,6 +517,7 @@
     .points_page_container{    
       background-repeat: no-repeat;
       background-size: cover;
+      padding-top: 50px;
     }
 
   }
@@ -512,5 +528,20 @@
     }
     .hand_painted > h2{
       margin:40px autp;
+    }
+  }
+  @media (max-width: 508px){
+    .points_page_container .progress_container{
+      flex-wrap: wrap;
+    }
+    .points_page_container .progress_container div:first-of-type h6{
+      text-align: center;
+    }
+    .points_page_container .progress_container > div:last-of-type {
+      width: 100%;
+    }
+    .progress_bar_parent{
+      margin-left: 0px;
+      margin-top: 15px;
     }
   }

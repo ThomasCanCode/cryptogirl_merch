@@ -22,6 +22,7 @@ setInterval(() => {
 
 }, 3600*1);// make sure you don't run this multiple times on the 1st of the month!!!!! make a boolean like alreadyRanBoolean = true, set it false on the next day
 
+
 function MyApp({ Component, pageProps }) {
   
   return (

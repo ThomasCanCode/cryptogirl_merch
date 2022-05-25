@@ -1,21 +1,26 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient } from '@prisma/client';
-
+import prisma from '../../components/prisma'
 
 export default async function handle(req,res){
-  const prisma = new PrismaClient();
   if(req.method === "GET"){
     try {
-        const d = new Date();
-        const newUser = await prisma.user_wallet.create({
-            data: {
-                wallet: req.query.wallet,
-                date: d.getTime(),
-            },
-        })   
-        return res.send('added user!');
+        let walletFromGet = req.query.wallet;
+        if(walletFromGet.length === 42){
+          const d = new Date();
+          const newUser = await prisma.user_wallet.create({
+              data: {
+                  wallet: walletFromGet,
+                  date: d.getTime(),
+              },
+          })   
+          prisma.$disconnect()
+          return res.send('added user!');
+        }else{
+          prisma.$disconnect()
+          return res.send('user wallet invalid');
+        }
     } catch (error) {
-        console.log(error)
+        prisma.$disconnect()
         return res.send('error! '+error)
     }
   } else if(req.method === "POST"){

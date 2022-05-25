@@ -217,3 +217,35 @@
   #mobile_menu {
     position: fixed;
 }
+.adminTable{
+  text-align: left;
+  margin: 50px auto;
+  font-family: Pragmatica;
+}
+.adminTable {
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.adminTable td, .adminTable th {
+  border: 1px solid #000;
+  padding: 8px;
+}
+
+.adminTable tr:nth-child(even){background-color: #f2f2f2;}
+
+
+.adminTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #108e91b0;
+  color: white;
+}
+.admin_heading{
+  margin: 50px auto 0;
+}
+.admin_page_container{
+  max-width: 90%;
+  margin: auto;
+}
