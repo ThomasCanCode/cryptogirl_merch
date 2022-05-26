@@ -219,11 +219,13 @@
 }
 .adminTable{
   text-align: left;
-  margin: 50px auto;
   font-family: Pragmatica;
-}
-.adminTable {
   border-collapse: collapse;
+}
+
+.tableContainer{
+  overflow-x: auto;
+  margin: 50px auto;
   width: 80%;
 }
 

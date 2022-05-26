@@ -1,12 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../components/prisma'
 import parse from 'html-react-parser';
+import React, { useState, useEffect } from 'react';
+import { useAtom } from 'jotai'
+import { atomWithStorage } from 'jotai/utils'
+import { ClientOnly } from '../points';
 
+const adminConnected = atomWithStorage('adminConnected', false);
+export default function Admin(props){
+  const [adminIsConnected, setadminIsConnected] = useAtom(adminConnected);
 
-export default function admin(props){
     function Table(){
         let arrayFromTable = JSON.parse(props.tabledata)
-        let stringTableHTML = "<table className='adminTable'>";
+        let stringTableHTML = "<div className='tableContainer'><table className='adminTable'>";
         stringTableHTML = stringTableHTML + "<tr><th>Wallet</th><th>Register Date</th><th>Points</th></tr>";
 
         arrayFromTable.forEach(user => {
@@ -20,7 +26,7 @@ export default function admin(props){
             stringTableHTML = stringTableHTML + "</tr>";
         });
 
-        stringTableHTML = stringTableHTML + "</table>"
+        stringTableHTML = stringTableHTML + "</table></div>"
         return parse(stringTableHTML);
     }
 
@@ -53,9 +59,9 @@ export default function admin(props){
 
         return (
             <form onSubmit={handleSubmit}>
-                <label>Modify points </label><br/>
+                <label className="pragmatica admin_heading">Modify points </label><br/>
                 <input type='text' placeholder='Enter wallet' name='wallet' required/>
-                <input type='number' placeholder='New points' name='new_points' required/>
+                <input type='number' placeholder='New points' name='new_points' min='0' required/>
                 <button type='submit'>Submit</button>
             </form>
         );
@@ -65,53 +71,69 @@ export default function admin(props){
         async function handleRevenue(event){
             event.preventDefault();
             
-            const data = {
-                total_revenue: event.target.total_revenue.value,
-            }
-            const JSONdata = JSON.stringify(data)
-            const endpoint = '/api/revenue'
-            const options = {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                },
-                body: JSONdata,
-            }
-            const response = await fetch(endpoint, options)
-            const result = await response.json()
-            if(result.response == "failed" || result.response == "error"){
-                alert('Failed to add points!')
-            }else{
-                window.location.reload();
-            }
+          fetch('/secret_api_total_revenue?revenueTotal='+event.target.total_revenue.value)
+          .then((res) => res.json())
+          .then((data) => {
+              alert(data)
+          })
+            // const data = {
+            //     total_revenue: event.target.total_revenue.value,
+            // }
+            // const JSONdata = JSON.stringify(data)
+            // const endpoint = '/revenue'
+            // const options = {
+            //     method: 'POST',
+            //     headers: {
+            //     'Content-Type': 'application/json',
+            //     },
+            //     body: JSONdata,
+            // }
+            // const response = await fetch(endpoint, options)
+            // const result = await response.json()
+            // if(result.response == "failed" || result.response == "error"){
+            //     alert('Failed to add points!')
+            // }else{
+            //     window.location.reload();
+            // }
         }
 
         return (
             <form onSubmit={handleRevenue}>
                 <label>Total revenue from secondary sales: </label><br/>
-                <input type='number' placeholder='Enter total revenue' name='total_revenue' required/>
+                <input type='number' placeholder='Enter total revenue' name='total_revenue' min='0' required/>
                 <button type='submit'>Submit</button>
             </form>
         )
     }
 
-
+    function ConnectedAdmin(){
+        return (
+            <>
+                <h1 className="pragmatica admin_heading">Admin page</h1>
+                <Table/>
+                <ChangePoints/>
+                <h2 className="pragmatica admin_heading">Revenue</h2>
+                <Revenue />
+                <button onClick={()=> setadminIsConnected(false)}>LogOut</button>
+            </>
+        )
+    }
+    function NotConnectedAdmin(){
+        function connectAdmin(){
+            setadminIsConnected(true)
+        }
+        return (
+            <>
+                <button onClick={()=> connectAdmin()}>press here to connect</button>
+            </>
+        )
+    }
   return (
       <div className="admin_page_container">
-        <h1 className="pragmatica admin_heading">Admin page</h1>
-        <Table/>
-        <ChangePoints/>
 
-        <h2 className="pragmatica admin_heading">Revenue</h2>
-        <Revenue />
-
-        <p>Then make another form with a field for total revenue + button to trigger adding of points, then for each wallet in db check on opensea how many nfts they have 
-        <br/><br/>
-        50% go towards the pool party = $50k  (25% 1 of 1&apos;s, 25% Crypto Girl NFT holders) <br/><br/>
-
-        If you own a 1 of 1 NFT, you would receive: 25% of $100k = $25k / 100 = $250.  You would receive $250 / claim 250 points.  
-        <br/><br/>
-        If you own any Crypto Girl NFT you would receive:  25% of $100k = $25k / 9950 = $2.51 per NFT you owned.  You would receive $2.51 / claim 2.51 points.</p>
+        <ClientOnly>
+          {adminIsConnected ? <ConnectedAdmin /> : <NotConnectedAdmin />}
+        </ClientOnly>
       </div>
   )
 }

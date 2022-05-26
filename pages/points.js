@@ -32,29 +32,31 @@ export default function Home() {
   };
 
   useEffect(()=>{
-    window.ethereum.on('accountsChanged', function (accounts) {
-      // Time to reload your interface with accounts[0]!
-      let tempAccount = accounts[0];
-      console.log('this is temp account '+tempAccount)
-      if(tempAccount){
-        if(tempAccount.length == 42){
-          setAccount(tempAccount)
-          fetch('api/get_points?wallet='+tempAccount)
-          .then((res) => res.json())
-          .then((data) => {
-            setTotal_points(data.points);
-          })
+    if(window.ethereum != undefined){
+      window.ethereum.on('accountsChanged', function (accounts) {
+        // Time to reload your interface with accounts[0]!
+        let tempAccount = accounts[0];
+        // console.log('this is temp account '+tempAccount)
+        if(tempAccount){
+          if(tempAccount.length == 42){
+            setAccount(tempAccount)
+            fetch('api/get_points?wallet='+tempAccount)
+            .then((res) => res.json())
+            .then((data) => {
+              setTotal_points(data.points);
+            })
+          }else{
+            alert(tempAccount.length)
+          }
+          
+          setIsConnected(true)
         }else{
-          alert(tempAccount.length)
+          setIsConnected(false)
+          setHasUnclaimedPoints(false)
+          setAccount('0x')
         }
-        
-        setIsConnected(true)
-      }else{
-        setIsConnected(false)
-        setHasUnclaimedPoints(false)
-        setAccount('0x')
-      }
-    })
+      })
+    }
   },[setAccount,account, setIsConnected])
 
   useEffect(() => {
@@ -274,7 +276,7 @@ export default function Home() {
   }
 }
 
-function ClientOnly({ children, ...delegated }) {
+export function ClientOnly({ children, ...delegated }) {
   const [hasMounted, setHasMounted] = React.useState(false);
   React.useEffect(() => {
     setHasMounted(true);
