@@ -64,7 +64,7 @@ export default function Admin(props){
             <form onSubmit={handleSubmit}>
                 <label className="pragmatica admin_heading">Modify points </label><br/>
                 <input type='text' placeholder='Enter wallet' name='wallet' required/>
-                <input type='number' placeholder='New points' name='new_points' min='0' required/>
+                <input type='number' placeholder='New points' name='new_points' min='0' step="0.000001" required/>
                 <button type='submit'>Update</button>
             </form>
         );

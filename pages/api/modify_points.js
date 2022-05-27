@@ -7,7 +7,7 @@ export default async function handle(req,res){
     try {
       const modify = await prisma.user_wallet.update({
         where: { wallet: req.body.wallet },
-        data: { points: parseInt(req.body.new_points) },
+        data: { points: parseFloat(req.body.new_points) },
       })
 
       if(modify != undefined){

@@ -96,7 +96,7 @@ export const getServerSideProps = async (params) => {
 
     total_points = (count_of_collectables_uniques * pointsPerUnique) + (count_of_regular_collectables * pointsPerNFT);//total from collectables
     console.log('finally total '+originals_collectables+' points for user: '+wallet+' is: '+total_points)
-    return parseInt(total_points); //total_points
+    return total_points; //total_points
   }
 
   return {

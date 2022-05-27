@@ -11,5 +11,5 @@ model user_wallet {
   id     Int     @unique(map: "id") @default(autoincrement())
   wallet String  @unique(map: "wallet") @db.VarChar(50)
   date   BigInt?
-  points Int?    @default(0)
+  points Float?  @default(0) @db.Float
 }
