@@ -304,6 +304,8 @@ export async function changeNFTimages(){
         data.assets.forEach(element => {
           if(element.name.startsWith("Crypto Girl Collectable #")){
             to_return.push(element.image_url);
+          }else if(element.asset_contract.address === "0x404144ea75970b25abbb76f767a6f8e0ef3b645e"){
+            to_return.push(element.image_url);
           }
         });
       }else{
@@ -369,7 +371,7 @@ export class Custom_carousel extends Component {
           },
         },
         {
-          breakpoint: 700,
+          breakpoint: 999,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,

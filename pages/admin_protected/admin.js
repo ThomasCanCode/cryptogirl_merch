@@ -50,7 +50,7 @@ export default function Admin(props){
                 const response = await fetch(endpoint, options)
                 const result = await response.json()
                 if(result.response == "failed" || result.response == "error"){
-                    alert('Failed to modify!')
+                    alert('Failed to modify, maybe wrong wallet address')
                 }else{
                     window.location.reload();
                 }
@@ -65,7 +65,7 @@ export default function Admin(props){
                 <label className="pragmatica admin_heading">Modify points </label><br/>
                 <input type='text' placeholder='Enter wallet' name='wallet' required/>
                 <input type='number' placeholder='New points' name='new_points' min='0' required/>
-                <button type='submit'>Submit</button>
+                <button type='submit'>Update</button>
             </form>
         );
     }
@@ -75,10 +75,10 @@ export default function Admin(props){
             event.preventDefault();
             
             fetch('/secret_api_total_revenue?revenueTotal='+event.target.total_revenue.value)
-            .then((res) => res.json())
-            .then((data) => {
-            alert(data)
-            })//do something here after submitting revenue data
+            .then(()=>{
+                alert('Updating points, please wait and do not press "Distribute points" again till next month!')
+                window.location.reload();
+            })
 
         }
 
@@ -86,7 +86,7 @@ export default function Admin(props){
             <form onSubmit={handleRevenue}>
                 <label>Total revenue from secondary sales: </label><br/>
                 <input type='number' placeholder='Enter total revenue' name='total_revenue' min='0' required/>
-                <button type='submit'>Submit</button>
+                <button type='submit'>Distribute points</button>
             </form>
         )
     }
@@ -95,7 +95,7 @@ export default function Admin(props){
         return (
             <>
                 <h1 className="pragmatica admin_heading">Admin page</h1>
-                <p className='text-center'>Please do not modify points the same day after entering total revenue!</p>
+                <p className='text-center'>Please do not modify points after entering total revenue and distributing points!</p>
                 <Table/>
                 <ChangePoints/>
                 <h2 className="pragmatica admin_heading">Revenue</h2>
@@ -113,7 +113,7 @@ export default function Admin(props){
             }
         }
         return (
-            <>
+            <>  <h2 className="pragmatica admin_heading">Enter password</h2>
                 <form onSubmit={connectAdmin} className='login_form_admin' method='post'>
                     <input type='password' name='ca8719dbca8719db' />
                     <button type="submit">log in</button>

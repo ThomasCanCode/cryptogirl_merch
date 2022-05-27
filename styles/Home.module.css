@@ -429,6 +429,7 @@
   border-radius: 30px;
   margin: auto;
   max-width: 100%;
+  max-height: 384px
 }
 .slider_container_points{
   padding-top: 10%;
