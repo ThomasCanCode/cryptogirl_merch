@@ -1,26 +1,8 @@
 import '../styles/globals.css'
 import Head from 'next/head'
 const date = new Date();
-
 global.next_payday = new Date(date.getFullYear(), date.getMonth() + 1, 1).getTime();
 
-
-var alreadyRanBoolean;
-setInterval(() => {
-
-
-  let day = date.getDate();
-  
-  if(day === 1 && alreadyRanBoolean != true){
-    
-    global.next_payday = new Date(date.getFullYear(), date.getMonth() + 1, 1).getTime();
-    alreadyRanBoolean = true;
-  }
-  if(day === 2){
-    alreadyRanBoolean = false;
-  }
-
-}, 3600*1);// make sure you don't run this multiple times on the 1st of the month!!!!! make a boolean like alreadyRanBoolean = true, set it false on the next day
 
 
 function MyApp({ Component, pageProps }) {

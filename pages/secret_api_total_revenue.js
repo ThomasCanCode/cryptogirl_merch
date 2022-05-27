@@ -1,12 +1,10 @@
-import { arrayify } from 'ethers/lib/utils';
-import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../components/prisma'
 
 export const getServerSideProps = async (params) => {
+  let pointsPerUnique, pointsPerNFT, halfOfTotal, poolForUnique, poolForRegular;
   let revenueTotal = params.query.revenueTotal;
   try {
     const wholeTable = await prisma.user_wallet.findMany();
-    let pointsPerUnique, pointsPerNFT, halfOfTotal, poolForUnique, poolForRegular;
 
     halfOfTotal = revenueTotal / 2;
     poolForUnique = halfOfTotal / 2;
@@ -16,85 +14,8 @@ export const getServerSideProps = async (params) => {
 
     loopFunction(wholeTable)
 
-    // wholeTable.forEach(async element => {   
-    //   console.log(element.wallet)
-    //   // const modify = await prisma.user_wallet.update({
-    //   //   where: { wallet: element.wallet },
-    //   //   data: { points: parseInt(req.body.new_points) },
-    //   // });
-    // });
-
-    //get all nfts for each user, make a delay so you don't get blocked! 5 seconds maybe
-
-    // const modify = await prisma.user_wallet.update({
-    //   where: { wallet: req.body.wallet },
-    //   data: { points: parseInt(req.body.new_points) },
-    // });
-
   } catch (error) {
     prisma.$disconnect()
-  }
-  async function howManyNFTsUserHas(wallet){
-    let opensea_api_url = "https://api.opensea.io/api/v1/assets?format=json&owner="+wallet;
-    // opensea_api_url = "http://localhost:9999";
-
-    const api_call = await fetch(opensea_api_url, {
-      credentials: 'include',
-      method: 'GET',
-      headers: {
-      'Host': 'api.opensea.io:443:',
-      'Connection': 'keep-alive',
-      'Cache-Control': 'max-age=0',
-      'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="101", "Google Chrome";v="101"',
-      'sec-ch-ua-mobile': '70',
-      'sec-ch-ua-platform': 'Linux',
-      'Upgrade-Insecure-Requests': '1',
-      'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36',
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-      'Sec-Fetch-Site': 'none',
-      'Sec-Fetch-Mode': 'navigate',
-      'Sec-Fetch-User': '?1',
-      'Sec-Fetch-Dest': 'document',
-      'Accept-Encoding': 'gzip, deflate, br',
-      'Accept-Language': 'en-US,en;q=0.9,ro;q=0.8'
-     },
-      });
-    console.log(api_call)
-    const data = await api_call.json();
-    var to_return = [];
-
-    if(data.assets){
-      if(data.assets.length > 0){
-        data.assets.forEach(element => {
-          if(element.name.startsWith("Crypto Girl Collectable #")){
-            to_return.push(element.image_url);
-          }
-        });
-      }else{
-        to_return = "You have no nfts"
-      }
-    }else{
-      to_return = "You have no nfts"
-    }
-  }
-  async function handleUser(user){
-    try {
-      let newPoints = user.points + 100;
-
-      const modify = await prisma.user_wallet.update({
-        where: { wallet: user.wallet },
-        data: { points: newPoints },
-      });
-
-      howManyNFTsUserHas(user.wallet)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      })
-    } catch (error) {
-      console.log('error adding revenue points to database!')
-      console.log(error)
-    }
   }
   async function loopFunction(wholeTable){
     var count = 0;
@@ -107,16 +28,82 @@ export const getServerSideProps = async (params) => {
         console.log('clearing...')
         clearInterval(interval)
       }
-    }, 3000);
+    }, 5000);
+  }
+  async function handleUser(user){
+    try {
+      let newPoints = 0,user_points_from_collectables = 0, user_points_from_originals = 0;
+
+      user_points_from_collectables = await getPointsFromWallet('collectables',user.wallet);
+      user_points_from_originals = await getPointsFromWallet('originals',user.wallet);
+      newPoints = user.points + user_points_from_collectables + user_points_from_originals;
+
+      const modify = await prisma.user_wallet.update({//we update points here
+        where: { wallet: user.wallet },
+        data: { points: newPoints },
+      });
+      console.log(' ')
+      console.log('total points for user '+ newPoints)
+      console.log(' ')
+      console.log(' ')
+
+    } catch (error) {
+      console.log('error adding revenue points to database!')
+      console.log(error)
+    }
+  }
+
+
+  async function getPointsFromWallet(originals_collectables, wallet){
+    let contract_address, total_points, count_of_collectables_uniques, count_of_regular_collectables;
+    let collectable_uniques = ['1','2','3','4','5','6','7','8','9','10','11','219','702']
+    if(originals_collectables === "originals"){
+      contract_address = "0x404144ea75970b25abbb76f767a6f8e0ef3b645e"
+    }else if(originals_collectables === "collectables"){
+      contract_address = "0xDa38E3cF623793fa46277773bbC5dEF9AD435c06";
+    }else{
+      throw 'error';
+    }
+    let opensea_api_url = "https://deep-index.moralis.io/api/v2/"+wallet+"/nft/"+contract_address+"?chain=eth&format=decimal";
+    const collectable_call = await fetch(opensea_api_url, {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+        'Content-Type': 'text/plain',
+        'accept': 'application/json',
+        'X-API-Key': 'Fz97igCTqsl7bGw9BLrwy53Kd2j8V5nn0l5mu0fPyg41peZIIMfqkdNyKNV5mM70',
+      },
+    });
+    const collectable_data = await collectable_call.json();
+
+    count_of_collectables_uniques = 0;
+    total_points = 0;
+    count_of_regular_collectables = 0;
+
+    if(originals_collectables === "collectables"){
+      collectable_data.result.forEach(element => {
+        if(collectable_uniques.indexOf(element.token_id) > 0){
+          count_of_collectables_uniques++;
+          console.log('unique NFT found for wallet '+wallet+" nr of NFT: "+element.token_id)
+        }else{//not one of the 13 unique NFTs
+          count_of_regular_collectables++;
+          console.log('regular NFT found for wallet '+wallet+" nr of NFT: "+element.token_id)
+        }
+      });
+      }else if(originals_collectables === "originals"){
+        count_of_collectables_uniques = collectable_data.total;
+      }
+
+    total_points = (count_of_collectables_uniques * pointsPerUnique) + (count_of_regular_collectables * pointsPerNFT);//total from collectables
+    console.log('finally total '+originals_collectables+' points for user: '+wallet+' is: '+total_points)
+    return parseInt(total_points); //total_points
   }
 
   return {
-    props: {tabledata: 'test'}, // will be passed to the page component as props
+    props: {tabledata: 'Useless prop'}, // will be passed to the page component as props
   }
 }
 
-export default function handle(props){
-
+export default function handle(){
   return (<>Calculate and update points</>)
-  
 }
