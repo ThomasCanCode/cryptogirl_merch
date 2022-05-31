@@ -1,5 +1,8 @@
 import '../styles/globals.css'
 import Head from 'next/head'
+import { Provider } from 'react-redux';       // Importing Provider
+import Navbar from '../components/Navbar';
+import store from '../redux/store';   
 const date = new Date();
 global.next_payday = new Date(date.getFullYear(), date.getMonth() + 1, 1).getTime();
 
@@ -8,7 +11,7 @@ global.next_payday = new Date(date.getFullYear(), date.getMonth() + 1, 1).getTim
 function MyApp({ Component, pageProps }) {
   
   return (
-  <>
+  <Provider store={store}>
     <Head>
       <title>Cryptogirl Merch</title>
       <meta name="description" content="Therapets" />
@@ -20,8 +23,9 @@ function MyApp({ Component, pageProps }) {
       <meta name="msapplication-TileColor" content="#da532c"></meta>
       <meta name="theme-color" content="#ffffff"></meta>
     </Head>
+        <Navbar />
     <Component {...pageProps} />
-  </>)
+  </Provider>)
 }
 
 export default MyApp

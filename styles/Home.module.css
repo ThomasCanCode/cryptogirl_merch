@@ -461,6 +461,22 @@
 .no_cgc a{
   text-decoration: underline!important;
 }
+
+
+.container_shop {
+  padding: 0 2rem;
+}
+.small {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.large {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+
 @media (min-width: 1901px){
   
   .footer{

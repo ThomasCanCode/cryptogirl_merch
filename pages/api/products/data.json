@@ -1,0 +1,52 @@
+[
+    {
+      "id": 1,
+      "title": "CUSTOM DENIM JACKET",
+      "product": "jacket",
+      "images": ["/jacket_1/jacket_1_1.png","/jacket_1/jacket_1_2.png","/jacket_1/jacket_1_3.png","/jacket_1/jacket_1_4.png",
+        "/jacket_1/jacket_1_5.png","/jacket_1/jacket_1_6.png","/jacket_1/jacket_1_7.png"],
+      "description": "Customize some Converse with your NFT. The Crypto Girl team will hand paint your selected NFT on a brandnew pair of kicks.",
+      "price": 21.99
+    },
+    {
+      "id": 2,
+      "title": "CUSTOM WHITE CONVERSE",
+      "product": "white_sneakers",
+      "images": ["/white_sneakers/white_sneakers_1.png","/white_sneakers/white_sneakers_2.png","/white_sneakers/white_sneakers_3.png","/white_sneakers/white_sneakers_4.png","/white_sneakers/white_sneakers_5.png"],
+      "description": "description",
+      "price": 130
+    },
+    {
+      "id": 3,
+      "title": "CUSTOM BLACK CONVERSE",
+      "product": "black_sneakers",
+      "images": ["/black_sneakers/black_sneakers_1.png","/black_sneakers/black_sneakers_2.png","/black_sneakers/black_sneakers_3.png","/black_sneakers/black_sneakers_4.png","/black_sneakers/black_sneakers_5.png"],
+      "description": "description",
+      "price": 21.99
+    },
+    {
+      "id": 4,
+      "title": "LARGE CANVAS",
+      "product": "canvas_large",
+      "images": ["/canvas_1/canvas_1_first.jpg","/canvas_1/canvas_1_second.jpg","/canvas_1/canvas_1_third.jpg"],
+      "description": "description",
+      "price": 110
+    },
+    {
+      "id": 5,
+      "title": "MEDIUM CANVAS",
+      "product": "canvas_medium",
+      "images": ["/canvas_2/canvas_2_first.jpg","/canvas_2/canvas_2_second.jpg","/canvas_2/canvas_2_third.jpg"],
+      "description": "description",
+      "price": 98
+    },
+    {
+      "id": 6,
+      "title": "SMALL CANVAS",
+      "product": "canvas_small",
+      "images": ["/canvas_3/canvas_3_first.jpg","/canvas_3/canvas_3_second.jpg","/canvas_3/canvas_3_third.jpg"],
+      "description": "description",
+      "price": 45
+    }
+  ]
+  

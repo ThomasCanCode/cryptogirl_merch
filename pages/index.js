@@ -3,7 +3,7 @@ import Script from 'next/script'
 import React, { Component } from "react";
 
 import styles from '../styles/Home.module.css'
-
+import Link from 'next/link';
 import logo from '/static/images/logo.png'
 import banner from '/static/images/top.jpg'
 import hoodies from '/static/images/hoodies.jpg'
@@ -18,11 +18,9 @@ import post_canvas_bg from '/static/images/post_canvas_bg.jpg'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-
 import Footer from "../components/footer"
 import Menu from "../components/menu"
 import Socials from "../components/socials"
-
 
 const large_canvas_desc = (
   <>90cm x 90cm (CGC)<br/>90cm x 60cm (CGO)<br/>$110 usdt including<br/>worldwide postage</>
@@ -44,16 +42,19 @@ export function BurgerButton(){
     <div id='burgerContainer' className={styles.burgerContainer+" burger_opener"}  onClick={(e) => toggleBurger()}><div></div><div></div><div></div></div>
   )
 }
+
 export function Product(props){
   return (
-    <div className={styles.product}>
-      <div className={styles.product_image}>
-        <Image alt="Product" src={props.src} height={props.height} width={props.width} blurDataURL={props.blurDataURL} />
+      <div className={styles.product}>
+        <div className={styles.product_image}>
+          <Image alt="Product" src={props.src} height={props.height} width={props.width} blurDataURL={props.blurDataURL} />
+        </div>
+        <h5 className='audiowide'>{props.title}</h5>
+        <h6 className='verdana'>{props.price}</h6>
+        <Link href={`/product/${props.name.toLowerCase()}`} passHref>
+          <a className='audiowide'>BUY NOW</a>
+        </Link>
       </div>
-      <h5 className='audiowide'>{props.title}</h5>
-      <h6 className='verdana'>{props.price}</h6>
-      <a href={props.link} className='audiowide'>BUY NOW</a>
-    </div>
   )
 }
 
@@ -98,9 +99,9 @@ export default function Home() {
         <h2 className='audiowide'>HAND PAINTED CUSTOM PIECES</h2>
 
         <div className={styles.products_container}>  
-          <Product title="CUSTOM PAINTED SNEAKERS" price="$150" link="https://shop.cryptogirlminter.com/product" src={sneakers} />
-          <Product title="CUSTOM DENIM JACKET" price="$400" link="https://shop.cryptogirlminter.com/product" src={jacket} />
-          <Product title="CUSTOM PAINTED SNEAKERS" price="$150" link="https://shop.cryptogirlminter.com/product" src={black_sneakers} />
+          <Product name="white_sneakers" title="CUSTOM WHITE CONVERSE" price="$150" src={sneakers} />
+          <Product name="jacket" title="CUSTOM DENIM JACKET" price="$400" src={jacket} />
+          <Product name="black_sneakers" title="CUSTOM BLACK CONVERSE" price="$150" src={black_sneakers} />
           
           <Custom_carousel/>
         </div>
@@ -117,9 +118,9 @@ export default function Home() {
         <h2 className='audiowide'>CANVAS PRINTS</h2>
 
         <div className={styles.products_container}>
-          <Product title="LARGE" price={large_canvas_desc} link="https://shop.cryptogirlminter.com/product" src={canvas_prints} />
-          <Product title="MEDIUM" price={medium_canvas_desc} link="https://shop.cryptogirlminter.com/product" src={canvas_prints} />
-          <Product title="SMALL" price={small_canvas_desc} link="https://shop.cryptogirlminter.com/product" src={canvas_prints} /> 
+          <Product name="canvas_large" title="LARGE" price={large_canvas_desc} src={canvas_prints} />
+          <Product name="canvas_medium" title="MEDIUM" price={medium_canvas_desc} src={canvas_prints} />
+          <Product name="canvas_small" title="SMALL" price={small_canvas_desc} src={canvas_prints} /> 
           <Canvas_carousel/>
         </div>
 
@@ -130,7 +131,6 @@ export default function Home() {
         <Footer/>
       </div>
 
-      
       <Script
         src="/static/inline.js" 
         onLoad={() => {
@@ -174,9 +174,10 @@ export class Custom_carousel extends Component {
     return (
       <div className={styles.slider}>
         <Slider {...settings}>
-          <Product title="CUSTOM PAINTED SNEAKERS" price="$150" link="https://shop.cryptogirlminter.com/product" src={sneakers} />
-          <Product title="CUSTOM DENIM JACKET" price="$400" link="https://shop.cryptogirlminter.com/product" src={jacket} />
-          <Product title="CUSTOM PAINTED SNEAKERS" price="$150" link="https://shop.cryptogirlminter.com/product" src={black_sneakers} />
+         
+          <Product name="sneakers" title="CUSTOM PAINTED SNEAKERS" price="$150" src={sneakers} />
+          <Product name="jacket" title="CUSTOM DENIM JACKET" price="$400" src={jacket} />
+          <Product name="sneakers" title="CUSTOM PAINTED SNEAKERS" price="$150" src={black_sneakers} />
         </Slider>
       </div>
     );
@@ -187,9 +188,9 @@ export class Canvas_carousel extends Component {
     return (
       <div className={styles.slider}>
         <Slider {...settings}>
-          <Product title="LARGE" price={large_canvas_desc} link="https://shop.cryptogirlminter.com/product" src={canvas_prints} />
-          <Product title="MEDIUM" price={medium_canvas_desc} link="https://shop.cryptogirlminter.com/product" src={canvas_prints} />
-          <Product title="SMALL" price={small_canvas_desc} link="https://shop.cryptogirlminter.com/product" src={canvas_prints} />
+          <Product name="canvas" title="LARGE" price={large_canvas_desc} src={canvas_prints} />
+          <Product name="canvas" title="MEDIUM" price={medium_canvas_desc} src={canvas_prints} />
+          <Product name="canvas" title="SMALL" price={small_canvas_desc} src={canvas_prints} />
         </Slider>
       </div>
     );

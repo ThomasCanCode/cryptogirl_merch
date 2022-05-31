@@ -257,3 +257,21 @@
 .login_form_admin{
   margin: 100px auto;;
 }
+
+
+
+
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.active_image{
+  order: 1!important;
+  height: 70%!important;
+  width: 70%!important;
+}

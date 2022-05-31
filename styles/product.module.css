@@ -39,6 +39,8 @@
 }
 .active_image{
     order: 1;
+    height: 70%;
+    width: 70%;
 }
 
 .product_page h3{

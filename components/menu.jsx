@@ -8,7 +8,8 @@ export default function Menu(){
       <li><a className={styles.animated_anchor} href="https://cryptogirlnft.io/our-team">TEAM</a></li>
       <li><a className={styles.animated_anchor} href="https://cryptogirlnft.io/disclaimer">DISCLAIMER</a></li>
       <li><a className={styles.animated_anchor} href="https://cryptogirlnft.io/contact-us">CONTACT</a></li>
-      <li><Link className={styles.animated_anchor} href="/points">POINTS</Link></li>
+      <li><Link href="/" passHref><a className={styles.animated_anchor}>SHOP</a></Link></li>
+      <li><Link href="/points" passHref><a className={styles.animated_anchor}>POINTS</a></Link></li>
     </ul>
   )
 }

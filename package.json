@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@prisma/client": "3.14.0",
+    "@reduxjs/toolkit": "^1.8.2",
     "@walletconnect/client": "^1.7.7",
     "@walletconnect/qrcode-modal": "^1.7.7",
     "html-react-parser": "^1.4.12",
@@ -21,7 +22,9 @@
     "react": "18.0.0",
     "react-countdown": "^2.3.2",
     "react-dom": "18.0.0",
+    "react-redux": "^8.0.2",
     "react-slick": "^0.29.0",
+    "redux-persist": "^6.0.0",
     "sharp": "^0.30.4",
     "slick-carousel": "^1.8.1",
     "tls": "^0.0.1"
