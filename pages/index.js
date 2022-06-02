@@ -109,7 +109,6 @@ export default function Home() {
         <div className={styles.post_products_creation}>
           <h2 className='audiowide'>CUSTOM HAND PAINTED JACKET</h2>
           <p className="verdana">Customize selected merchandise pieces and have your NFT hand painted on an item from one of our selected artists from around the world. Currently customizing vintage Denim Jackets and Converse High tops with items to rotate quarterly.</p>
-          <a className={styles.animated_anchor} href='#'>START YOUR CREATION</a>
         </div>
       </div>
 
@@ -174,10 +173,9 @@ export class Custom_carousel extends Component {
     return (
       <div className={styles.slider}>
         <Slider {...settings}>
-         
-          <Product name="sneakers" title="CUSTOM PAINTED SNEAKERS" price="$150" src={sneakers} />
+          <Product name="white_sneakers" title="CUSTOM WHITE CONVERSE" price="$150" src={sneakers} />
           <Product name="jacket" title="CUSTOM DENIM JACKET" price="$400" src={jacket} />
-          <Product name="sneakers" title="CUSTOM PAINTED SNEAKERS" price="$150" src={black_sneakers} />
+          <Product name="black_sneakers" title="CUSTOM BLACK CONVERSE" price="$150" src={black_sneakers} />
         </Slider>
       </div>
     );

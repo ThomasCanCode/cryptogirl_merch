@@ -75,7 +75,6 @@ export default function Home() {
   }, [account,setIsConnected])
 
   useEffect(() => {
-    console.log(total_points)
     if(total_points > 0){
       setFirstHeading('YOU HAVE UNUSED POINTS!')
       setCollect(true)
@@ -293,34 +292,30 @@ export function ClientOnly({ children, ...delegated }) {
 
 export async function changeNFTimages(){
   if(global.account){
-    let opensea_api_url = "https://api.opensea.io/api/v1/assets?format=json&owner="+global.account;
+    let url_prefix_collectables = "https://ipfs.moralis.io:2053/ipfs/QmYKuv1U1Vp3oBbp31sBb9ceduysiDPhcAHafoLoAF9QQW/";
+    let url_prefix_originals = "https://....";
+    let api_url = "/api/get_nfts?wallet="+global.account;
 
-    const api_call = await fetch(opensea_api_url);
+    const api_call = await fetch(api_url);
     const data = await api_call.json();
     var to_return = [];
 
-    if(data.assets){
-      if(data.assets.length > 0){
-        data.assets.forEach(element => {
-          if(element.name.startsWith("Crypto Girl Collectable #")){
-            to_return.push(element.image_url);
-          }else if(element.asset_contract.address === "0x404144ea75970b25abbb76f767a6f8e0ef3b645e"){
-            to_return.push(element.image_url);
-          }
-        });
-      }else{
-        to_return = "You have no nfts"
-      }
-    }else{
-      to_return = "You have no nfts"
+
+    if(data.collectables.length > 0){
+      data.collectables.forEach(element => {
+        to_return.push(url_prefix_collectables+element+".png");
+      });
     }
-
-
-
-    // daca nu ai nft uri cu cryptogirl sa ti zica
+    if(data.originals.length > 0){
+      data.originals.forEach(element => {
+        to_return.push(url_prefix_originals+element+".mp4");
+      });
+    }
+    console.log(to_return)
     return to_return;
   }
 }
+let changeNFTCounter = 0;
 export class Custom_carousel extends Component {
   constructor(props){
     super(props);
@@ -328,16 +323,19 @@ export class Custom_carousel extends Component {
       slides: []
     };
   }
-
-  async componentDidMount(){
-    const promise = Promise.resolve(changeNFTimages()).then((result)=>{
-
-      const { slides } = this.state;
-      this.setState({
-        slides: result
-      });
-    })
+  async componentWillUnmount(){
+    if(changeNFTCounter === 0){
+      changeNFTCounter = changeNFTCounter+1;
+      const promise = Promise.resolve(changeNFTimages()).then((result)=>{
+        alert(result)
+        const { slides } = this.state;
+        this.setState({
+          slides: result
+        });
+      })
+    }
   }
+
   render() {
     let text = "YOUR CRYPTOGIRLS"
     var slidesToShow = 0;

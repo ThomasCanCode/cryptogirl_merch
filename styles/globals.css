@@ -255,9 +255,16 @@
   margin: auto;
 }
 .login_form_admin{
-  margin: 100px auto;;
+  margin: 100px auto;
 }
 
+.active_image{
+  order: 1!important;
+  height: 350px!important;
+  opacity: 100%!important;
+  width: 100%!important;
+  margin-bottom: 30px!important;
+}
 
 
 
@@ -269,9 +276,3 @@
   justify-content: space-between;
 }
 
-
-.active_image{
-  order: 1!important;
-  height: 70%!important;
-  width: 70%!important;
-}

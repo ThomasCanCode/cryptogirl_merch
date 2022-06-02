@@ -5,48 +5,162 @@
       "product": "jacket",
       "images": ["/jacket_1/jacket_1_1.png","/jacket_1/jacket_1_2.png","/jacket_1/jacket_1_3.png","/jacket_1/jacket_1_4.png",
         "/jacket_1/jacket_1_5.png","/jacket_1/jacket_1_6.png","/jacket_1/jacket_1_7.png"],
-      "description": "Customize some Converse with your NFT. The Crypto Girl team will hand paint your selected NFT on a brandnew pair of kicks.",
-      "price": 21.99
+      "description": "Crypto Girl has partnered up with Original Genes to bring you your very own Crypto Girl NFT, custom painted onto a vintage denim jacket. <br/><br/>*Please note, all jackets are Vintage Jackets (used/second-hand) however, all are quality inspected and approved prior to your purchase.",
+      "price": 400,
+      "options": [
+        {
+          "name":"Colour",
+          "type": "select",
+          "placeholder": "",
+          "fields": ["Light Denim","Dark Denim"]
+        },
+        {
+          "name":"Gender",
+          "type": "text",
+          "placeholder": "Gender",
+          "fields": []
+        },
+        {
+          "name":"Size",
+          "type": "text",
+          "placeholder": "Size",
+          "fields": []
+        },
+        {
+          "name":"NFT number",
+          "type": "text",
+          "placeholder": "Number of NFT to print",
+          "fields": []
+        }
+      ]
     },
     {
       "id": 2,
       "title": "CUSTOM WHITE CONVERSE",
       "product": "white_sneakers",
       "images": ["/white_sneakers/white_sneakers_1.png","/white_sneakers/white_sneakers_2.png","/white_sneakers/white_sneakers_3.png","/white_sneakers/white_sneakers_4.png","/white_sneakers/white_sneakers_5.png"],
-      "description": "description",
-      "price": 130
+      "description": "Custom Converse kicks with your NFT.<br/>Crypto Girl has partnered up with Original Genes to bring you your very own Crypto Girl NFT, custom painted on either a white or black pair of classic high top converse kicks.<br/>*All shoes are purchased after the order is made.  Crypto girl is not a retailer or seller of Converse shoes nor does it claim to be.",
+      "price": 250,
+      "options": [
+        {
+          "name":"Colour",
+          "type": "select",
+          "placeholder": "",
+          "fields": ["Black","White"]
+        },
+        {
+          "name":"Gender",
+          "type": "text",
+          "placeholder": "Gender",
+          "fields": []
+        },
+        {
+          "name":"Size",
+          "type": "text",
+          "placeholder": "Size",
+          "fields": []
+        },
+        {
+          "name":"NFT number",
+          "type": "text",
+          "placeholder": "Number of NFT to print",
+          "fields": []
+        }
+      ]
     },
     {
       "id": 3,
       "title": "CUSTOM BLACK CONVERSE",
       "product": "black_sneakers",
       "images": ["/black_sneakers/black_sneakers_1.png","/black_sneakers/black_sneakers_2.png","/black_sneakers/black_sneakers_3.png","/black_sneakers/black_sneakers_4.png","/black_sneakers/black_sneakers_5.png"],
-      "description": "description",
-      "price": 21.99
+      "description": "Custom Converse kicks with your NFT.<br/>Crypto Girl has partnered up with Original Genes to bring you your very own Crypto Girl NFT, custom painted on either a white or black pair of classic high top converse kicks.<br/>*All shoes are purchased after the order is made.  Crypto girl is not a retailer or seller of Converse shoes nor does it claim to be.",
+      "price": 250,
+      "options": [
+        {
+          "name":"Colour",
+          "type": "select",
+          "placeholder": "",
+          "fields": ["Black","White"]
+        },
+        {
+          "name":"Gender",
+          "type": "text",
+          "placeholder": "Gender",
+          "fields": []
+        },
+        {
+          "name":"Size",
+          "type": "text",
+          "placeholder": "Size",
+          "fields": []
+        },
+        {
+          "name":"NFT number",
+          "type": "text",
+          "placeholder": "Number of NFT to print",
+          "fields": []
+        }
+      ]
     },
     {
       "id": 4,
       "title": "LARGE CANVAS",
       "product": "canvas_large",
       "images": ["/canvas_1/canvas_1_first.jpg","/canvas_1/canvas_1_second.jpg","/canvas_1/canvas_1_third.jpg"],
-      "description": "description",
-      "price": 110
+      "description": "Enjoy your Crypto Girl Collectables NFT as a Canvas print.  These prints look incredible in any size. Quality prints are suitable for hanging in any room.<br/>Archival pigment ink-jet print on 200gsm Fine Art Smooth Paper. ",
+      "price": 80,
+      "options": [
+        { "name": "NFT number",
+          "type": "text",
+          "placeholder": "Number of NFT to print",
+          "fields": []
+        }
+      ]
     },
     {
       "id": 5,
       "title": "MEDIUM CANVAS",
       "product": "canvas_medium",
       "images": ["/canvas_2/canvas_2_first.jpg","/canvas_2/canvas_2_second.jpg","/canvas_2/canvas_2_third.jpg"],
-      "description": "description",
-      "price": 98
+      "description": "Enjoy your Crypto Girl Collectables NFT as a Canvas print.  These prints look incredible in any size. Quality prints are suitable for hanging in any room.<br/>Archival pigment ink-jet print on 200gsm Fine Art Smooth Paper. ",
+      "price": 26,
+      "options": [
+        { "name": "NFT number",
+          "type": "text",
+          "placeholder": "Number of NFT to print",
+          "fields": []
+        }
+      ]
     },
     {
       "id": 6,
       "title": "SMALL CANVAS",
       "product": "canvas_small",
       "images": ["/canvas_3/canvas_3_first.jpg","/canvas_3/canvas_3_second.jpg","/canvas_3/canvas_3_third.jpg"],
-      "description": "description",
-      "price": 45
+      "description": "Enjoy your Crypto Girl Collectables NFT as a Canvas print.  These prints look incredible in any size. Quality prints are suitable for hanging in any room.<br/>Archival pigment ink-jet print on 200gsm Fine Art Smooth Paper. ",
+      "price": 15,
+      "options": [
+        { "name": "NFT number",
+          "type": "text",
+          "placeholder": "Number of NFT to print",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "XL CANVAS",
+      "product": "canvas_extralarge",
+      "images": ["/canvas_4/canvas_4_first.jpg","/canvas_4/canvas_4_second.jpg","/canvas_4/canvas_4_third.jpg"],
+      "description": "Enjoy your Crypto Girl Collectables NFT as a Canvas print.  These prints look incredible in any size. Quality prints are suitable for hanging in any room.<br/>Archival pigment ink-jet print on 200gsm Fine Art Smooth Paper. ",
+      "price": 97,
+      "options": [
+        { "name": "NFT number",
+          "type": "text",
+          "placeholder": "Number of NFT to print",
+          "fields": []
+        }
+      ]
     }
   ]
   

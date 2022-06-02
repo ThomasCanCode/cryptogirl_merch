@@ -2,12 +2,12 @@ import Image from "next/image"
 import styles from "../styles/product.module.css"
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/cart.slice';
+import parse from 'html-react-parser';
 
 
 
 function changeActive(e){ 
     const elems = document.querySelectorAll(".product_images")
-    console.log('trying')
     elems.forEach((item) => {
         item.classList.remove("active_image")
     })
@@ -23,6 +23,8 @@ function formSubmit(event){
 export default function Product_page({ product }) {
     const dispatch = useDispatch();
 
+    
+    
     return (
         
         <div className={styles.product_page}>
@@ -46,15 +48,44 @@ export default function Product_page({ product }) {
                     <h3>{product.title}</h3>
                     <h5>USDT ${product.price}</h5>
                     <form onSubmit={formSubmit}>
-                        <div className={styles.individual_option}>
-                            <label htmlFor="color">COLOR:</label>
-                            <select defaultValue={'DEFAULT'} id="color" name="color">
-                                <option value="DEFAULT" disabled></option>
-                                <option>option 1</option>
-                                <option>option 2</option>
-                            </select>
-                        </div>
-                        <div className={styles.individual_option}>
+                        {Object.entries(product.options).map(([key,obj]) => {
+                            let name = obj.name;
+                            let name_hash = 'option_child '+obj.name;
+                            let type = obj.type;
+                            let placeholder = obj.placeholder;
+                            let fields = obj.fields;
+                            String.prototype.hashCode = function() {
+                                var hash = 0;
+                                for (var i = 0; i < this.length; i++) {
+                                    var char = this.charCodeAt(i);
+                                    hash = ((hash<<5)-hash)+char;
+                                    hash = hash & hash; // Convert to 32bit integer
+                                }
+                                return hash;
+                            }
+                            if(type == "text"){
+                                return (
+                                    <div key={name_hash} className={styles.individual_option}>
+                                        <label htmlFor={name_hash}>{name}:</label>
+                                        <input placeholder={placeholder} id={name_hash} name={name_hash}/>
+                                    </div>
+                                )
+                            }else{
+                                return (
+                                    <div key={name} id={name} className={styles.individual_option}>
+                                        <label htmlFor={name}>{name}:</label>
+                                        <select defaultValue={'DEFAULT'} id={'option_child'+name} name="color">
+                                            {fields.map(function(data, idx){
+                                                return (
+                                                    <option value={data} key={data}>{data}</option>
+                                                )
+                                            })}
+                                        </select>
+                                    </div>
+                                )
+                            }
+                        })}
+                        {/* <div className={styles.individual_option}>
                             <label htmlFor="gender">GENDER:</label>
                             <select defaultValue={'DEFAULT'} id="gender" name="gender">
                                 <option value="DEFAULT" disabled></option>
@@ -69,7 +100,7 @@ export default function Product_page({ product }) {
                                 <option>option 1</option>
                                 <option>option 2</option>
                             </select>
-                        </div>
+                        </div> */}
                         {/* <div className={styles.individual_option}>
                             <label htmlFor="receipt">RECEIPT NUMBER:</label>
                             <select defaultValue={'DEFAULT'} id="receipt" name="receipt">
@@ -99,7 +130,7 @@ export default function Product_page({ product }) {
            </div>
 
         <div className={styles.product_page_text_container}>
-            <p>{product.description}</p>
+            <p>{parse(product.description)}</p>
             <h4>HOW TO ORDER</h4>
             <p>Fill out the Drop down menu<br/>
             Select the NFT you want on the item <br/>
