@@ -7,98 +7,96 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
-import { useAtom } from 'jotai'
-import { atomWithStorage } from 'jotai/utils'
-import { isArray } from "tls";
+import { useAtom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
-
-const connectAtom = atomWithStorage('connectPersistant', false)
-const accountAtom = atomWithStorage('accountPersistant', "0x")
+const connectAtom = atomWithStorage("connectPersistant", false);
+const accountAtom = atomWithStorage("accountPersistant", "0x");
 
 export default function Home() {
-  const [firstHeading, setFirstHeading] = useState("COME BACK ON THE 1ST")
+  const [firstHeading, setFirstHeading] = useState("COME BACK ON THE 1ST");
   const [collect, setCollect] = useState(false);
-  const [total_points, setTotal_points] = useState(0)
+  const [total_points, setTotal_points] = useState(0);
   const [hasUnclaimedPoints, setHasUnclaimedPoints] = useState(false);
-  const [openseaData, setOpenseaData] = useState(false);
 
-  const [isConnected, setIsConnected] = useAtom(connectAtom)
+  const [isConnected, setIsConnected] = useAtom(connectAtom);
   const [account, setAccount] = useAtom(accountAtom);
-  // const [isConnected, setIsConnected] = useState(false);
-  // const [account, setAccount] = useState("0x");
 
-  const childToParent = (childdata) => {
-    setOpenseaData(childdata);
-  };
 
-  useEffect(()=>{
-    if(window.ethereum != undefined){
-      window.ethereum.on('accountsChanged', function (accounts) {
+  useEffect(() => {
+    if (window.ethereum != undefined) {
+      window.ethereum.on("accountsChanged", function (accounts) {
         // Time to reload your interface with accounts[0]!
         let tempAccount = accounts[0];
         // console.log('this is temp account '+tempAccount)
-        if(tempAccount){
-          if(tempAccount.length == 42){
-            setAccount(tempAccount)
-            fetch('api/get_points?wallet='+tempAccount)
-            .then((res) => res.json())
-            .then((data) => {
-              setTotal_points(data.points);
-            })
-          }else{
-            alert(tempAccount.length)
+        if (tempAccount) {
+          if (tempAccount.length == 42) {
+            setAccount(tempAccount);
+            fetch("api/get_points?wallet=" + tempAccount)
+              .then((res) => res.json())
+              .then((data) => {
+                setTotal_points(data.points);
+              });
+          } else {
+            console.log(tempAccount.length);
           }
-          
-          setIsConnected(true)
-        }else{
-          setIsConnected(false)
-          setHasUnclaimedPoints(false)
-          setAccount('0x')
+
+          setIsConnected(true);
+        } else {
+          setIsConnected(false);
+          setHasUnclaimedPoints(false);
+          setAccount("0x");
         }
-      })
+      });
     }
-  },[setAccount,account, setIsConnected])
+  }, [setAccount, account, setIsConnected]);
 
   useEffect(() => {
-    if(account != "0x"){
-      setIsConnected(true)
-      fetch('api/get_points?wallet='+account)
-      .then((res) => res.json())
-      .then((data) => {
-        setTotal_points(data.points);
-      })
+    if (account != "0x") {
+      setIsConnected(true);
+      fetch("api/get_points?wallet=" + account)
+        .then((res) => res.json())
+        .then((data) => {
+          setTotal_points(data.points);
+        });
 
       global.account = account;
-    }else{
-      setIsConnected(false)
+    } else {
+      setIsConnected(false);
     }
-  }, [account,setIsConnected])
+  }, [account, setIsConnected]);
 
   useEffect(() => {
-    if(total_points > 0){
-      setFirstHeading('YOU HAVE UNUSED POINTS!')
-      setCollect(true)
-      setHasUnclaimedPoints(true)
-    }else if (total_points === 0){
-      setHasUnclaimedPoints(false)
-    }else if(total_points == "not_found"){
-      setFirstHeading("Welcome to CRYPTOGIRL rewards!")
-      setCollect(false)
+    if (total_points > 0) {
+      setFirstHeading("YOU HAVE UNUSED POINTS!");
+      setCollect(true);
+      setHasUnclaimedPoints(true);
+    } else if (total_points === 0) {
+      setHasUnclaimedPoints(false);
+    } else if (total_points == "not_found") {
+      setFirstHeading("Welcome to CRYPTOGIRL rewards!");
+      setCollect(false);
     }
-  }, [total_points])
+  }, [total_points]);
 
-
-  
   return (
-    <div className={styles.points_page_container}  suppressHydrationWarning={true}>
+    <div
+      className={styles.points_page_container}
+      suppressHydrationWarning={true}
+    >
       <div>
         <h1>CRYPTOGIRL</h1>
         <h2>POINTS</h2>
         <ClientOnly>
           {isConnected ? <WalletConnected /> : <WalletNotConnected />}
+          <div className={styles.slider_container_points}>
+            {isConnected ? <Custom_carousel /> : <></>}
+          </div>
+          <p>
+            Cryptogirl points is a source of passive income for all Cryptogirl NFT
+            holders! The lucky few who have unique pieces receive massive rewards!
+          </p>
         </ClientOnly>
-
-
 
         <Script
           src="/static/inline.js"
@@ -114,11 +112,11 @@ export default function Home() {
     return (
       <>
         <h2 className={styles.unused_points}>{firstHeading}</h2>
-        {collect ? <Collect/> : <NoCollect />}
+        {collect ? <Collect /> : <NoCollect />}
       </>
     );
   }
-  function Collect(){
+  function Collect() {
     return (
       <>
         {/* <button className={styles.collect + " " + styles.animated_anchor}>
@@ -126,10 +124,16 @@ export default function Home() {
         </button> */}
         <h5>YOUR TOTAL POINTS: {total_points}</h5>
       </>
-    )
+    );
   }
-  function NoCollect(){
-    return (<h2>{'You have been registered, come back on the 1st to collect your points!'}</h2>)
+  function NoCollect() {
+    return (
+      <h2>
+        {
+          "You have been registered, come back on the 1st to collect your points!"
+        }
+      </h2>
+    );
   }
   function No_unclaimed() {
     return (
@@ -138,25 +142,32 @@ export default function Home() {
       </>
     );
   }
-  function DisconnectBtn(){
-    function disconnect(){
-      if(typeof window.ethereum !== "undefined"){
-        console.log('disconnect metamask')
-        setAccount('0x')
-      }else{
+  function DisconnectBtn() {
+    function disconnect() {
+      if (typeof window.ethereum !== "undefined") {
+        console.log("disconnect metamask");
+        setAccount("0x");
+        setIsConnected(false);
+        window.location.reload();
+      } else {
         const connector = new WalletConnect({
           bridge: "https://bridge.walletconnect.org", // Required
           qrcodeModal: QRCodeModal,
         });
 
-        connector.killSession()
-        setAccount('0x')
+        connector.killSession();
+        setAccount("0x");
+        setIsConnected(false);
       }
-
     }
     return (
-      <button className={styles.withdraw+" "+styles.disconnect_button} onClick={() => disconnect()}>Disconnect</button>
-    )
+      <button
+        className={styles.withdraw + " " + styles.disconnect_button}
+        onClick={() => disconnect()}
+      >
+        Disconnect
+      </button>
+    );
   }
   function WalletConnected() {
     return (
@@ -173,182 +184,174 @@ export default function Home() {
           </ClientOnly>
         </div>
 
-        <div className={styles.slider_container_points}>
-          <Custom_carousel />
-        </div>
-
-        <p>
-          Cryptogirl points is a source of passive income for all Cryptogirl NFT holders!
-          The lucky few who have unique pieces receive massive rewards!
-        </p>
-
         {/* {collect ? <button className={styles.withdraw + " " + styles.animated_anchor}>WITHDRAW</button> : <></> } */}
       </>
     );
   }
-  async function connect(){
-    if(window.ethereum){
+  async function connect() {
+    if (window.ethereum) {
       try {
-        global.account = await ethereum.request({method: "eth_requestAccounts"});
+        global.account = await ethereum.request({
+          method: "eth_requestAccounts",
+        });
         setAccount(global.account);
-  
-        
+        setIsConnected(true)
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }else{
-      if(typeof window !== "undefined"){
-        if(typeof window.ethereum !== "undefined"){
-          console.log('Metamasks Present!')
-        }else{
-          //wallet connect 
+    } else {
+      if (typeof window !== "undefined") {
+        if (typeof window.ethereum !== "undefined") {
+          console.log("Metamasks Present!");
+        } else {
+          //wallet connect
           // Create a connector
           const connector = new WalletConnect({
             bridge: "https://bridge.walletconnect.org", // Required
             qrcodeModal: QRCodeModal,
           });
-      
+
           // Check if connection is already established
           if (!connector.connected) {
             // create new session
             connector.createSession();
           }
-      
+
           // Subscribe to connection events
           connector.on("connect", (error, payload) => {
             if (error) {
               throw error;
-            }else{
+            } else {
               // console.log(payload)
             }
-      
+
             // Get provided accounts and chainId
             const { accounts, chainId } = payload.params[0];
             setAccount(accounts);
+            setIsConnected(true);
           });
-      
+
           connector.on("session_update", (error, payload) => {
             if (error) {
               throw error;
-            }else{
+            } else {
               // console.log(payload)
             }
-      
+
             // Get updated accounts and chainId
             const { accounts, chainId } = payload.params[0];
             setAccount(accounts);
+            setIsConnected(true);
           });
-      
+
           connector.on("disconnect", (error, payload) => {
             if (error) {
               throw error;
-            }else{
+            } else {
               // console.log(payload)
             }
-      
+
             // Delete connector
           });
 
-          if(connector.accounts[0]){
-            if(connector.accounts[0].startsWith('0x')){
+          if (connector.accounts[0]) {
+            if (connector.accounts[0].startsWith("0x")) {
               setAccount(connector.accounts[0]);
+              setIsConnected(true);
             }
           }
-      
         }
-      }else{
-        console.log('Window not defined')
+      } else {
+        console.log("Window not defined");
       }
       setIsConnected(false);
     }
   }
-  
-  
-  
+
   function WalletNotConnected() {
     return (
       <>
-        <h2 className={styles.marginTopBot}>Wallet not connected, please connect below!</h2>
-        <button className={styles.withdraw} onClick={() => connect()}>Connect!</button> 
+        <h2 className={styles.marginTopBot}>
+          Wallet not connected, please connect below!
+        </h2>
+        <button className={styles.withdraw} onClick={() => connect()}>
+          Connect!
+        </button>
       </>
     );
   }
 }
 
 export function ClientOnly({ children, ...delegated }) {
-  const [hasMounted, setHasMounted] = React.useState(false);
-  React.useEffect(() => {
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
     return null;
   }
-  return (
-    <div {...delegated}>
-      {children}
-    </div>
-  );
-}
-
-export async function changeNFTimages(){
-  if(global.account){
-    let url_prefix_collectables = "https://ipfs.moralis.io:2053/ipfs/QmYKuv1U1Vp3oBbp31sBb9ceduysiDPhcAHafoLoAF9QQW/";
-    let url_prefix_originals = "https://....";
-    let api_url = "/api/get_nfts?wallet="+global.account;
-
-    const api_call = await fetch(api_url);
-    const data = await api_call.json();
-    var to_return = [];
-
-
-    if(data.collectables.length > 0){
-      data.collectables.forEach(element => {
-        to_return.push(url_prefix_collectables+element+".png");
-      });
-    }
-    if(data.originals.length > 0){
-      data.originals.forEach(element => {
-        to_return.push(url_prefix_originals+element+".mp4");
-      });
-    }
-    console.log(to_return)
-    return to_return;
-  }
+  return <div {...delegated}>{children}</div>;
 }
 let changeNFTCounter = 0;
+let fetched_data;
 export class Custom_carousel extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       slides: []
     };
   }
-  async componentWillUnmount(){
-    if(changeNFTCounter === 0){
-      changeNFTCounter = changeNFTCounter+1;
-      const promise = Promise.resolve(changeNFTimages()).then((result)=>{
-        alert(result)
-        const { slides } = this.state;
+  componentDidMount() {
+    if(changeNFTCounter === 0 && global.account){
+      changeNFTCounter++
+      console.log('fetching')
+      console.log(global.account)
+      Promise.resolve(fetch("/api/get_nfts?wallet=0x25C1Fcc343DCdf3Cc89C3Dd96d19284c3333fcE3"))//+ global.account
+      .then((res)=>res.json())
+      .then((final)=>{
+        fetched_data = final;
+
+        let url_prefix_collectables = "https://cryptogirlnft.io/assets_for_points/";
+        let url_prefix_originals = "https://openseauserdata.com/files/9e053c8fa824ace6a4df4840beaa2e22";
+        var to_return = [];
+    
+        if (fetched_data.collectables.length > 0) {
+          fetched_data.collectables.forEach((element) => {
+            to_return.push(url_prefix_collectables + element + ".png");
+          });
+        }
+        if (fetched_data.originals.length > 0) {
+          fetched_data.originals.forEach((element) => {
+            to_return.push(url_prefix_originals  + ".mp4");//+ element
+          });
+        }
+
         this.setState({
-          slides: result
+          slides: to_return
+        }, ()=>{
+          console.log('state set!')
+          console.log(fetched_data)
         });
-      })
+
+        // Force a render without state change...
+        // this.forceUpdate();
+      });
     }
   }
 
   render() {
-    let text = "YOUR CRYPTOGIRLS"
+    let text = "YOUR CRYPTOGIRLS";
     var slidesToShow = 0;
-    if(this.state.slides){
-      if(this.state.slides.length > 2){
+    if (this.state.slides) {
+      if (this.state.slides.length > 2) {
         slidesToShow = 3;
-      }else if(this.state.slides.length == 2){
+      } else if (this.state.slides.length == 2) {
         slidesToShow = 2;
-      }else if(this.state.slides == 0){
-        text = '';
+      } else if (this.state.slides == 0) {
+        text = "";
         slidesToShow = 0;
-      }else{
-        slidesToShow = 1
+      } else {
+        slidesToShow = 1;
       }
     }
     const settings = {
@@ -356,7 +359,7 @@ export class Custom_carousel extends Component {
       slidesToShow: slidesToShow,
       slidesToScroll: 1,
       autoplay: true,
-      speed: 2000,
+      speed: 1000,
       infinite: true,
       autoplaySpeed: 5000,
       width: 1000,
@@ -378,28 +381,44 @@ export class Custom_carousel extends Component {
       ],
     };
 
-    if(isArray(this.state.slides)){
-      /* eslint-disable */
-      return (
-        <>
-          <div>
-            <h6>{text}</h6>
-          </div>
-          <div className={styles.points_slider} id="slider_carousel">
-            <Slider {...settings}>
-              {this.state.slides.map(function(slide) {
-                return (
-                  <div key={slide}>
-                    <img alt="" src={slide} className="nft_image" />
-                  </div>
-                );
-              })}
-            </Slider>
-          </div>
-        </>
-      );
-    }else{
-      return (<h2 className={styles.no_cgc}>You have no CryptoGirl Collectables, you can buy some  <a href="https://opensea.io/collection/cryptogirl-collectables" target="_blank" rel="noreferrer noopener">here</a>!</h2>)
+    if (this.state.slides) {
+      if (this.state.slides.length > 0) {
+        /* eslint-disable */
+        return (
+          <>
+            <div>
+              <h6>{text}</h6>
+            </div>
+            <div className={styles.points_slider} id="slider_carousel">
+              <Slider {...settings}>
+                {this.state.slides.map(function (slide) {
+                  if(slide.endsWith('png')){
+                    return (
+                      <div key={slide}>
+                        <img alt="" src={slide} className="nft_image" />
+                      </div>
+                    );
+                  }else{
+                    return;
+                    return (
+                      <div key={slide}>
+                        <video autoPlay muted loop  className="nft_video" >
+                          <source src={slide} type="video/mp4"/>
+                        </video>
+                      </div>
+                    );
+                  }
+                })
+                }
+              </Slider>
+            </div>
+          </>
+        );
+      } else {
+        return (
+          <h2 className={styles.no_cgc}>You have no CryptoGirl Collectables, you can buy some  
+          <a href="https://opensea.io/collection/cryptogirl-collectables" target="_blank" rel="noreferrer noopener">here</a>!</h2>
+        )}
     }
   }
 }
