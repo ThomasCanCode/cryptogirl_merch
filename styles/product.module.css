@@ -67,7 +67,7 @@
 }
 .product_page_right label{
     font-size: 0.8rem;
-    margin: 16px 0;
+    margin: 18px 0;
     display: inline-block;
     white-space: nowrap;
     padding-right: 10px;
@@ -80,6 +80,10 @@
     border-bottom-color: #474747;
     display:block;
     width:100%;
+    padding: 5px;
+    outline: none;
+    padding-bottom: 0;
+    border-bottom-width: 2px;
 }
 .product_page input{
     border-left:none;
@@ -89,10 +93,7 @@
     display: flex;
     justify-content: flex-start;
 }
-.individual_option:nth-child(4),
-.individual_option:nth-child(5){
-    flex-wrap: wrap;
-}
+
 
 .individual_option:nth-child(4) label,
 .individual_option:nth-child(5) label{

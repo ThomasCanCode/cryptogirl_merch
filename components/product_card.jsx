@@ -1,10 +1,10 @@
 import Image from "next/image"
 import styles from "../styles/product.module.css"
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../redux/cart.slice';
+import { addToCart } from '../redux/slices/cartSlice';
 import parse from 'html-react-parser';
 
-z
+
 
 function changeActive(e){ 
     const elems = document.querySelectorAll(".product_images")

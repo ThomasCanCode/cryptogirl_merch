@@ -306,7 +306,7 @@ export class Custom_carousel extends Component {
       changeNFTCounter++
       console.log('fetching')
       console.log(global.account)
-      Promise.resolve(fetch("/api/get_nfts?wallet=0x25C1Fcc343DCdf3Cc89C3Dd96d19284c3333fcE3"))//+ global.account
+      Promise.resolve(fetch("/api/get_nfts?wallet="+ global.account))//
       .then((res)=>res.json())
       .then((final)=>{
         fetched_data = final;

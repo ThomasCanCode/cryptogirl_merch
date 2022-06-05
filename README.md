@@ -13,3 +13,4 @@ pay functionality
 admin page with database function 
 email on checkout after payment
 add cryptogirl originals products
+privacy policy page

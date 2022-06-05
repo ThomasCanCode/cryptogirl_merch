@@ -1,5 +1,12 @@
 .navbar{
   position: fixed;
-  right: 5%;
+  right: 2%;
+  top: 2%;
   z-index: 999;
+  background-color: #79d2d4;
+  color: #fff!important;
+  border:none;
+}
+.navbar:hover{
+  transform: scale(1.1);
 }

@@ -5,7 +5,7 @@ export default async function handle(req,res){
 
     try {
       let wallet = req.query.wallet;
-      console.log('this is wallet '+wallet)
+      // console.log('this is wallet '+wallet)
       if(wallet.length == 42){
         let to_return = await getPointsFromWallet(wallet);
         return res.status(200).json(to_return)
@@ -74,10 +74,6 @@ async function getPointsFromWallet(wallet){
       "originals":originals_result
     };
 
-    console.log(to_return)
-    console.log(collectables_result)
-    console.log(originals_result)
-    console.log(wallet)
     return to_return;
    } catch (error) {
      console.log(error)

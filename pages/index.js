@@ -21,7 +21,7 @@ import Slider from "react-slick";
 import Footer from "../components/footer"
 import Menu from "../components/menu"
 import Socials from "../components/socials"
-
+import Navbar from '../components/Navbar';
 const large_canvas_desc = (
   <>90cm x 90cm (CGC)<br/>90cm x 60cm (CGO)<br/>$110 usdt including<br/>worldwide postage</>
 );
@@ -61,6 +61,7 @@ export function Product(props){
 export default function Home() {
   return (
     <div className={styles.container}>
+      <Navbar/>
       <div className={styles.top_section}>
         <header className={styles.header}>
           <div className={styles.header_logo}>

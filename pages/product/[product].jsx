@@ -13,7 +13,7 @@ import Socials from "../../components/socials"
 
 import Product_page from '../../components/product_card';
 import { getProductsByCategory } from '../api/products/[product]';
-
+import Navbar from '../../components/Navbar';
 const large_canvas_desc = (
   <>90cm x 90cm (CGC)<br/>90cm x 60cm (CGO)<br/>$110 usdt including<br/>worldwide postage</>
 );
@@ -38,6 +38,7 @@ export function BurgerButton(){
 export default function Home(props) {
   return (
     <div className={styles.container}>
+      <Navbar/>
       <div className={styles.top_section}>
         <header className={styles.header}>
           <div className={styles.header_logo}>
