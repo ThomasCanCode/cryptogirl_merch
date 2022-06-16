@@ -216,10 +216,10 @@
   min-width: 0!important;
   width: auto!important;
 }
-.products_container .product + .product .product_image{
+.canvas_prints_container .products_container .product + .product .product_image{
   padding-bottom: 10%;
 }
-.products_container .product + .product + .product .product_image{
+.canvas_prints_container .products_container .product + .product + .product .product_image{
   padding-bottom: 20%;
 }
 .products_container .product h5{
@@ -260,6 +260,9 @@
 }
 .canvas_prints_container .product:nth-child(3) .product_image{
   max-width: 60%;
+}
+.canvas_prints_container .product:nth-child(4) .product_image{
+  max-width: 45%;
 }
 .canvas_prints_container h6{
   font-size: 0.6rem;

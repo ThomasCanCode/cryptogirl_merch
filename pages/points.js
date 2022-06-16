@@ -223,6 +223,7 @@ export default function Home() {
               throw error;
             } else {
               // console.log(payload)
+              window.location.reload()
             }
 
             // Get provided accounts and chainId
@@ -240,6 +241,7 @@ export default function Home() {
 
             // Get updated accounts and chainId
             const { accounts, chainId } = payload.params[0];
+            global.account = accounts;
             setAccount(accounts);
             setIsConnected(true);
           });
@@ -251,6 +253,7 @@ export default function Home() {
               // console.log(payload)
             }
 
+            window.location.reload()
             // Delete connector
           });
 
@@ -304,15 +307,12 @@ export class Custom_carousel extends Component {
   componentDidMount() {
     if(changeNFTCounter === 0 && global.account){
       changeNFTCounter++
-      console.log('fetching')
-      console.log(global.account)
       Promise.resolve(fetch("/api/get_nfts?wallet="+ global.account))//
       .then((res)=>res.json())
       .then((final)=>{
         fetched_data = final;
 
         let url_prefix_collectables = "https://cryptogirlnft.io/assets_for_points/";
-        let url_prefix_originals = "https://openseauserdata.com/files/9e053c8fa824ace6a4df4840beaa2e22";
         var to_return = [];
     
         if (fetched_data.collectables.length > 0) {
@@ -321,16 +321,23 @@ export class Custom_carousel extends Component {
           });
         }
         if (fetched_data.originals.length > 0) {
+          console.log(fetched_data.originals)
           fetched_data.originals.forEach((element) => {
-            to_return.push(url_prefix_originals  + ".mp4");//+ element
+            let split;
+            try {
+              split = element.split('#')
+              to_return.push(url_prefix_collectables + parseInt(split[1])  + ".m4v");
+            } catch (error) {
+              console.log(error)
+            }
           });
         }
 
         this.setState({
           slides: to_return
         }, ()=>{
-          console.log('state set!')
-          console.log(fetched_data)
+          // console.log('state set!')
+          // console.log(fetched_data)
         });
 
         // Force a render without state change...
@@ -399,7 +406,6 @@ export class Custom_carousel extends Component {
                       </div>
                     );
                   }else{
-                    return;
                     return (
                       <div key={slide}>
                         <video autoPlay muted loop  className="nft_video" >
@@ -417,7 +423,7 @@ export class Custom_carousel extends Component {
       } else {
         return (
           <h2 className={styles.no_cgc}>You have no CryptoGirl Collectables, you can buy some  
-          <a href="https://opensea.io/collection/cryptogirl-collectables" target="_blank" rel="noreferrer noopener">here</a>!</h2>
+          <a href="https://opensea.io/collection/cryptogirl-collectables" target="_blank" rel="noreferrer noopener"> here</a>!</h2>
         )}
     }
   }

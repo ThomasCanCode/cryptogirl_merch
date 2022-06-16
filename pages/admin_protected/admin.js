@@ -29,6 +29,24 @@ export default function Admin(props){
         return parse(stringTableHTML);
     }
 
+
+    function Orders(){
+        let arrayFromTable = JSON.parse(props.ordersdata)
+        let stringTableHTML = "<div className='tableContainer'><table className='adminTable'>";
+        stringTableHTML = stringTableHTML + "<tr><th>User Info</th><th>Order Info</th></tr>";
+
+        arrayFromTable.forEach(user => {
+
+            stringTableHTML = stringTableHTML + "<tr>";
+            stringTableHTML = stringTableHTML + "<td>"+user.user_info+"</td>";
+            stringTableHTML = stringTableHTML + "<td>"+user.order_info+"</td>";
+            stringTableHTML = stringTableHTML + "</tr>";
+        });
+
+        stringTableHTML = stringTableHTML + "</table></div>"
+        return parse(stringTableHTML);
+    }
+
     function ChangePoints(){
 
         async function handleSubmit(event){
@@ -100,7 +118,9 @@ export default function Admin(props){
                 <ChangePoints/>
                 <h2 className="pragmatica admin_heading">Revenue</h2>
                 <Revenue />
-                <button onClick={()=> ca871f9dbca8719db(false)}>LogOut</button>
+                <h2 className="pragmatica admin_heading">Orders</h2>
+                <Orders/>
+                <button onClick={()=> ca871f9dbca8719db(false)}>Log Out</button>
             </>
         )
     }
@@ -137,8 +157,11 @@ export async function getServerSideProps(context) {
       }
     const wholeTable = await prisma.user_wallet.findMany()
     let data = JSON.stringify(wholeTable)
+
+    const orders = await prisma.orders.findMany()
+    let orders_data = JSON.stringify(orders)
     
     return {
-      props: {tabledata: data}, // will be passed to the page component as props
+      props: {tabledata: data , ordersdata: orders_data}, // will be passed to the page component as props
     }
   }

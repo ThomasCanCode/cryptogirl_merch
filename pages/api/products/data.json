@@ -38,16 +38,10 @@
       "id": 2,
       "title": "CUSTOM WHITE CONVERSE",
       "product": "white_sneakers",
-      "images": ["/white_sneakers/white_sneakers_1.png","/white_sneakers/white_sneakers_2.png","/white_sneakers/white_sneakers_3.png","/white_sneakers/white_sneakers_4.png","/white_sneakers/white_sneakers_5.png"],
+      "images": ["/white_sneakers/white_sneakers_1.png","/white_sneakers/white_sneakers_2.png","/white_sneakers/white_sneakers_3.png","/white_sneakers/white_sneakers_4.png","/white_sneakers/white_sneakers_5.png","/white_sneakers/white_sneakers_6.png"],
       "description": "Custom Converse kicks with your NFT.<br/>Crypto Girl has partnered up with Original Genes to bring you your very own Crypto Girl NFT, custom painted on either a white or black pair of classic high top converse kicks.<br/>*All shoes are purchased after the order is made.  Crypto girl is not a retailer or seller of Converse shoes nor does it claim to be.",
       "price": 250,
       "options": [
-        {
-          "name":"Colour",
-          "type": "select",
-          "placeholder": "",
-          "fields": ["Black","White"]
-        },
         {
           "name":"Gender",
           "type": "text",
@@ -77,12 +71,6 @@
       "price": 250,
       "options": [
         {
-          "name":"Colour",
-          "type": "select",
-          "placeholder": "",
-          "fields": ["Black","White"]
-        },
-        {
           "name":"Gender",
           "type": "text",
           "placeholder": "Gender",
@@ -108,8 +96,14 @@
       "product": "canvas_large",
       "images": ["/canvas_1/canvas_1_first.jpg","/canvas_1/canvas_1_second.jpg","/canvas_1/canvas_1_third.jpg"],
       "description": "Enjoy your Crypto Girl Collectables NFT as a Canvas print.  These prints look incredible in any size. Quality prints are suitable for hanging in any room.<br/>Archival pigment ink-jet print on 200gsm Fine Art Smooth Paper. ",
-      "price": 80,
+      "price": 110,
       "options": [
+        {
+          "name":"CGC or CGO",
+          "type": "select",
+          "placeholder": "",
+          "fields": ["Crypto Girl Collectables","Crypto Girl Originals"]
+        },
         { "name": "NFT number",
           "type": "text",
           "placeholder": "Number of NFT to print",
@@ -123,8 +117,14 @@
       "product": "canvas_medium",
       "images": ["/canvas_2/canvas_2_first.jpg","/canvas_2/canvas_2_second.jpg","/canvas_2/canvas_2_third.jpg"],
       "description": "Enjoy your Crypto Girl Collectables NFT as a Canvas print.  These prints look incredible in any size. Quality prints are suitable for hanging in any room.<br/>Archival pigment ink-jet print on 200gsm Fine Art Smooth Paper. ",
-      "price": 26,
+      "price": 98,
       "options": [
+        {
+          "name":"CGC or CGO",
+          "type": "select",
+          "placeholder": "",
+          "fields": ["Crypto Girl Collectables","Crypto Girl Originals"]
+        },
         { "name": "NFT number",
           "type": "text",
           "placeholder": "Number of NFT to print",
@@ -136,10 +136,16 @@
       "id": 6,
       "title": "SMALL CANVAS",
       "product": "canvas_small",
-      "images": ["/canvas_3/canvas_3_first.jpg","/canvas_3/canvas_3_second.jpg","/canvas_3/canvas_3_third.jpg"],
+      "images": ["/canvas_3/canvas_3_first.jpg","/canvas_3/canvas_3_second.jpg","/canvas_3/canvas_3_third.jpg","/canvas_3/canvas_3_fourth.jpg"],
       "description": "Enjoy your Crypto Girl Collectables NFT as a Canvas print.  These prints look incredible in any size. Quality prints are suitable for hanging in any room.<br/>Archival pigment ink-jet print on 200gsm Fine Art Smooth Paper. ",
-      "price": 15,
+      "price": 45,
       "options": [
+        {
+          "name":"CGC or CGO",
+          "type": "select",
+          "placeholder": "",
+          "fields": ["Crypto Girl Collectables","Crypto Girl Originals"]
+        },
         { "name": "NFT number",
           "type": "text",
           "placeholder": "Number of NFT to print",
@@ -149,12 +155,18 @@
     },
     {
       "id": 7,
-      "title": "XL CANVAS",
-      "product": "canvas_extralarge",
+      "title": "XS CANVAS",
+      "product": "canvas_extrasmall",
       "images": ["/canvas_4/canvas_4_first.jpg","/canvas_4/canvas_4_second.jpg","/canvas_4/canvas_4_third.jpg"],
       "description": "Enjoy your Crypto Girl Collectables NFT as a Canvas print.  These prints look incredible in any size. Quality prints are suitable for hanging in any room.<br/>Archival pigment ink-jet print on 200gsm Fine Art Smooth Paper. ",
-      "price": 97,
+      "price": 15,
       "options": [
+        {
+          "name":"CGC or CGO",
+          "type": "select",
+          "placeholder": "",
+          "fields": ["Crypto Girl Collectables","Crypto Girl Originals"]
+        },
         { "name": "NFT number",
           "type": "text",
           "placeholder": "Number of NFT to print",

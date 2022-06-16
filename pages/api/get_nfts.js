@@ -65,7 +65,7 @@ async function getPointsFromWallet(wallet){
     if(originals.result != undefined){
       if(originals.result.length > 0){
         originals.result.forEach(element => {
-          originals_result.push(element.token_id)
+          originals_result.push(element.metadata)
         });
       }
     }

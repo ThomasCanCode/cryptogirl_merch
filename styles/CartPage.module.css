@@ -1,13 +1,15 @@
-.container {
+.container_shop {
     padding: 2rem;
     text-align: center;
+    min-width: 900px;
+    font-family: Pragmatica!important;
   }
-  .header {
+  .header_cartpage {
     margin-top: 2rem;
     display: flex;
     justify-content: space-between;
   }
-  .header div {
+  .header_cartpage div {
     flex: 1;
     text-align: center;
     font-size: 1rem;
@@ -20,9 +22,10 @@
   .body {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center!important;
     text-align: center;
     margin-bottom: 1rem;
+    align-items: flex-start;
   }
   .body > * {
     flex: 1;
@@ -40,3 +43,22 @@
     margin: 0.5rem;
     font-size: 1rem;
   }
+.ThomasHeader a{
+  color: #000!important;
+}
+.ThomasHeader{
+  margin-bottom: 5%!important;
+}
+.options_ul {
+  padding-left: 0;
+}
+.options_ul li{
+  list-style: none;
+  text-transform: capitalize;
+  font-size: 0.7rem;
+  text-align: center;
+  color: #6B3E81;
+}
+.paragraph{
+  line-height: 1rem;
+}

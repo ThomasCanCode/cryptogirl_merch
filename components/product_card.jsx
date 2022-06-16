@@ -3,6 +3,7 @@ import styles from "../styles/product.module.css"
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/slices/cartSlice';
 import parse from 'html-react-parser';
+import Link from "next/link";
 
 
 
@@ -22,14 +23,28 @@ export default function Product_page({ product }) {
     
 function formSubmit(event){
     event.preventDefault();
+    let options = {};
+    let formData = {};
 
     let first = event.target[0]
     let second = event.target[1]
     let third = event.target[2]
     let fourth = event.target[3]
 
-    let formData = [first.value,second.value,third.value,fourth.value]
-    dispatch(addToCart({product,options:formData}))
+    Object.entries(event.target).map((element) => {
+        let name = element[1].name;
+        // console.log(element[1].name)
+        if(typeof name === "undefined"){
+            return;
+        }else{
+    
+            if(element[1].name.length > 1){
+                options = {...options, [name.replace('option_child ','')]:element[1].value}
+            }
+        }
+    });
+    // console.log(options)
+    dispatch(addToCart({product,options}))
 
 }
     
@@ -45,7 +60,6 @@ function formSubmit(event){
                         }
                         return (
                             <div key={idx} id={idx} className={styles.individual_product_image+" product_images "+classname} onClick={() => changeActive(idx)}>
-                                {/* <h5>{idx}</h5> */}
                                 <Image src={src} layout="fill" alt={"Product "+idx} />
                             </div>
                         )
@@ -99,16 +113,16 @@ function formSubmit(event){
                         >
                             ADD TO MY BAG
                         </button>
-                        <button className={styles.blue_btn}>BUY NOW</button>
+                        <Link href="/cart" passHref><button className={styles.blue_btn}>BUY NOW</button></Link>
 
                     </form>
                 </div>                
            </div>
 
-        <div className={styles.product_page_text_container}>
-            <p>{parse(product.description)}</p>
-            <p>Please note, as these are HAND PAINTED pieces, no item is identical and there may be slight differences from the draft sketch and the final prodcuts. All sales are final with no refunds for this specific service.</p>
-        </div>
+            <div className={styles.product_page_text_container}>
+                <p>{parse(product.description)}</p>
+                <p>Please note, as these are HAND PAINTED pieces, no item is identical and there may be slight differences from the draft sketch and the final prodcuts. All sales are final with no refunds for this specific service.</p>
+            </div>
            
         </div>
     )

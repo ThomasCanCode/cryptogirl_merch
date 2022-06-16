@@ -16,7 +16,7 @@ export default function footer() {
         <a className={styles.animated_anchor} href='https://cryptogirlnft.io/'><Image alt="Logo" src={logo} priority="true" /></a>
         <Menu/>
         <Socials/>
-        <p className='pragmatica'>All the information on this website - www.cryptogirlnft.io - is published in good faith and for general information purpose only. Cryptogirl Nft does not make any warranties about the completeness, reliability and accuracy of this information. Any action you take upon the information you find on this website (Cryptogirl Nft ), is strictly at your own risk. Cryptogirl Nft will not be liable for any losses and/or damages in connection with the use of our website.</p>
+        <p className='pragmatica'>All the information on this website - shop.cryptogirlminter.com - is published in good faith and for general information purpose only. Cryptogirl Nft does not make any warranties about the completeness, reliability and accuracy of this information. Any action you take upon the information you find on this website (Cryptogirl Nft ), is strictly at your own risk. Cryptogirl Nft will not be liable for any losses and/or damages in connection with the use of our website.</p>
         </div>
     </footer>
   );

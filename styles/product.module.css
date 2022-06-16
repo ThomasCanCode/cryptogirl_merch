@@ -38,6 +38,7 @@
     width: auto!important;
     display: block!important;
     margin: auto!important;
+    min-width: auto!important;
 }
 .individual_product_image h5{
     position: absolute;
